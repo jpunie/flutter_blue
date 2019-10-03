@@ -82,6 +82,12 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
     } else {
       result(@(NO));
     }
+  } else if([@"requestEnable" isEqualToString:call.method]) {
+     // not supported by OS
+     result(nil);
+  } else if([@"requestDisable" isEqualToString:call.method]) {
+     // not supported by OS
+     result(nil);
   } else if([@"startScan" isEqualToString:call.method]) {
     // Clear any existing scan results
     [self.scannedPeripherals removeAllObjects];
@@ -126,6 +132,8 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
     NSString *remoteId = [call arguments];
     @try {
       CBPeripheral *peripheral = [self findPeripheral:remoteId];
+      [_channel invokeMethod:@"DeviceState" arguments:[self toFlutterData:[self toDeviceStateProto:peripheral state:CBPeripheralStateDisconnecting]]];
+
       [_centralManager cancelPeripheralConnection:peripheral];
       result(nil);
     } @catch(FlutterError *e) {
@@ -387,10 +395,10 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
   NSLog(@"didDisconnectPeripheral");
   // Unregister self as delegate for peripheral, not working #42
-  peripheral.delegate = nil;
-  
   // Send connection state
   [_channel invokeMethod:@"DeviceState" arguments:[self toFlutterData:[self toDeviceStateProto:peripheral state:peripheral.state]]];
+
+  peripheral.delegate = nil;
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
