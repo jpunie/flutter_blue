@@ -614,11 +614,17 @@ public class FlutterBluePlugin implements MethodCallHandler, RequestPermissionsR
             int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case REQUEST_COARSE_LOCATION_PERMISSIONS:
-                pendingPermissionsEnsureCallbacks.onResult(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-                pendingPermissionsEnsureCallbacks = null;
-                if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    pendingResult.error(
-                            "no_permissions", "flutter_blue plugin requires location permissions for scanning", null);
+                if (pendingPermissionsEnsureCallbacks != null) {
+                    pendingPermissionsEnsureCallbacks.onResult(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+                    pendingPermissionsEnsureCallbacks = null;
+                }
+                if (pendingResult != null) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        startScan(pendingCall, pendingResult);
+                    } else {
+                        pendingResult.error(
+                                "no_permissions", "flutter_blue plugin requires location permissions for scanning", null);
+                    }
                     pendingResult = null;
                     pendingCall = null;
                 }
