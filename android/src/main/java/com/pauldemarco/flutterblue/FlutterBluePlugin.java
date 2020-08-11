@@ -758,7 +758,10 @@ public class FlutterBluePlugin implements MethodCallHandler, RequestPermissionsR
                 @Override
                 public void onBatchScanResults(List<ScanResult> results) {
                     super.onBatchScanResults(results);
-
+                    for(ScanResult result: results) {
+                        Protos.ScanResult scanResult = ProtoMaker.from(result.getDevice(), result);
+                        invokeMethodUIThread("ScanResult", scanResult.toByteArray());
+                    }
                 }
 
                 @Override
