@@ -100,8 +100,11 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
       NSString *u = [request.serviceUuidsArray objectAtIndex:i];
       uuids = [uuids arrayByAddingObject:[CBUUID UUIDWithString:u]];
     }
-    // TODO: iOS Scan Options (#35)
-    [self->_centralManager scanForPeripheralsWithServices:uuids options:nil];
+    NSMutableDictionary<NSString *, id> *scanOpts = [NSMutableDictionary new];
+    if (request.allowDuplicates) {
+        [scanOpts setObject:[NSNumber numberWithBool:YES] forKey:CBCentralManagerScanOptionAllowDuplicatesKey];
+    }
+    [self->_centralManager scanForPeripheralsWithServices:uuids options:scanOpts];
     result(nil);
   } else if([@"stopScan" isEqualToString:call.method]) {
     [self->_centralManager stopScan];
@@ -109,7 +112,7 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
   } else if([@"getConnectedDevices" isEqualToString:call.method]) {
     // Cannot pass blank UUID list for security reasons. Assume all devices have the Generic Access service 0x1800
     NSArray *periphs = [self->_centralManager retrieveConnectedPeripheralsWithServices:@[[CBUUID UUIDWithString:@"1800"]]];
-    NSLog(@"getConnectedDevices periphs size: %d", [periphs count]);
+    NSLog(@"getConnectedDevices periphs size: %lu", [periphs count]);
     result([self toFlutterData:[self toConnectedDeviceResponseProto:periphs]]);
   } else if([@"connect" isEqualToString:call.method]) {
     FlutterStandardTypedData *data = [call arguments];
