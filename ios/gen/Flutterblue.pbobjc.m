@@ -20,22 +20,6 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#pragma clang diagnostic ignored "-Wdollar-in-identifier-extension"
-
-#pragma mark - Objective C Class declarations
-// Forward declarations of Objective C classes that we can use as
-// static values in struct initializers.
-// We don't use [Foo class] because it is not a static value.
-GPBObjCClassDeclaration(ProtosAdvertisementData);
-GPBObjCClassDeclaration(ProtosBluetoothCharacteristic);
-GPBObjCClassDeclaration(ProtosBluetoothDescriptor);
-GPBObjCClassDeclaration(ProtosBluetoothDevice);
-GPBObjCClassDeclaration(ProtosBluetoothService);
-GPBObjCClassDeclaration(ProtosCharacteristicProperties);
-GPBObjCClassDeclaration(ProtosInt32Value);
-GPBObjCClassDeclaration(ProtosReadDescriptorRequest);
-GPBObjCClassDeclaration(ProtosWriteCharacteristicRequest);
-GPBObjCClassDeclaration(ProtosWriteDescriptorRequest);
 
 #pragma mark - ProtosFlutterblueRoot
 
@@ -80,11 +64,11 @@ typedef struct ProtosInt32Value__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "value",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosInt32Value_FieldNumber_Value,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosInt32Value__storage_, value),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
     };
@@ -95,7 +79,7 @@ typedef struct ProtosInt32Value__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosInt32Value__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -129,7 +113,7 @@ typedef struct ProtosBluetoothState__storage_ {
         .number = ProtosBluetoothState_FieldNumber_State,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosBluetoothState__storage_, state),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
         .dataType = GPBDataTypeEnum,
       },
     };
@@ -140,7 +124,7 @@ typedef struct ProtosBluetoothState__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosBluetoothState__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -154,13 +138,13 @@ typedef struct ProtosBluetoothState__storage_ {
 int32_t ProtosBluetoothState_State_RawValue(ProtosBluetoothState *message) {
   GPBDescriptor *descriptor = [ProtosBluetoothState descriptor];
   GPBFieldDescriptor *field = [descriptor fieldWithNumber:ProtosBluetoothState_FieldNumber_State];
-  return GPBGetMessageRawEnumField(message, field);
+  return GPBGetMessageInt32Field(message, field);
 }
 
 void SetProtosBluetoothState_State_RawValue(ProtosBluetoothState *message, int32_t value) {
   GPBDescriptor *descriptor = [ProtosBluetoothState descriptor];
   GPBFieldDescriptor *field = [descriptor fieldWithNumber:ProtosBluetoothState_FieldNumber_State];
-  GPBSetMessageRawEnumField(message, field, value);
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
 }
 
 #pragma mark - Enum ProtosBluetoothState_State
@@ -237,16 +221,16 @@ typedef struct ProtosAdvertisementData__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "localName",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosAdvertisementData_FieldNumber_LocalName,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosAdvertisementData__storage_, localName),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "txPowerLevel",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosInt32Value),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosInt32Value),
         .number = ProtosAdvertisementData_FieldNumber_TxPowerLevel,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosAdvertisementData__storage_, txPowerLevel),
@@ -255,16 +239,16 @@ typedef struct ProtosAdvertisementData__storage_ {
       },
       {
         .name = "connectable",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosAdvertisementData_FieldNumber_Connectable,
         .hasIndex = 2,
         .offset = 3,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "manufacturerData",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosAdvertisementData_FieldNumber_ManufacturerData,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(ProtosAdvertisementData__storage_, manufacturerData),
@@ -273,7 +257,7 @@ typedef struct ProtosAdvertisementData__storage_ {
       },
       {
         .name = "serviceData",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosAdvertisementData_FieldNumber_ServiceData,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(ProtosAdvertisementData__storage_, serviceData),
@@ -282,7 +266,7 @@ typedef struct ProtosAdvertisementData__storage_ {
       },
       {
         .name = "serviceUuidsArray",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosAdvertisementData_FieldNumber_ServiceUuidsArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(ProtosAdvertisementData__storage_, serviceUuidsArray),
@@ -297,7 +281,7 @@ typedef struct ProtosAdvertisementData__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosAdvertisementData__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -329,16 +313,16 @@ typedef struct ProtosScanSettings__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "androidScanMode",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosScanSettings_FieldNumber_AndroidScanMode,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosScanSettings__storage_, androidScanMode),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "serviceUuidsArray",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosScanSettings_FieldNumber_ServiceUuidsArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(ProtosScanSettings__storage_, serviceUuidsArray),
@@ -353,7 +337,7 @@ typedef struct ProtosScanSettings__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosScanSettings__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -387,7 +371,7 @@ typedef struct ProtosScanResult__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "device",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosBluetoothDevice),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosBluetoothDevice),
         .number = ProtosScanResult_FieldNumber_Device,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosScanResult__storage_, device),
@@ -396,7 +380,7 @@ typedef struct ProtosScanResult__storage_ {
       },
       {
         .name = "advertisementData",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosAdvertisementData),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosAdvertisementData),
         .number = ProtosScanResult_FieldNumber_AdvertisementData,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosScanResult__storage_, advertisementData),
@@ -405,11 +389,11 @@ typedef struct ProtosScanResult__storage_ {
       },
       {
         .name = "rssi",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosScanResult_FieldNumber_Rssi,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(ProtosScanResult__storage_, rssi),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
     };
@@ -420,7 +404,7 @@ typedef struct ProtosScanResult__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosScanResult__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -451,20 +435,20 @@ typedef struct ProtosConnectRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosConnectRequest_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosConnectRequest__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "androidAutoConnect",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosConnectRequest_FieldNumber_AndroidAutoConnect,
         .hasIndex = 1,
         .offset = 2,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
     };
@@ -475,7 +459,7 @@ typedef struct ProtosConnectRequest__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosConnectRequest__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -509,20 +493,20 @@ typedef struct ProtosBluetoothDevice__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothDevice_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosBluetoothDevice__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "name",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothDevice_FieldNumber_Name,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosBluetoothDevice__storage_, name),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
@@ -531,7 +515,7 @@ typedef struct ProtosBluetoothDevice__storage_ {
         .number = ProtosBluetoothDevice_FieldNumber_Type,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(ProtosBluetoothDevice__storage_, type),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
         .dataType = GPBDataTypeEnum,
       },
     };
@@ -542,7 +526,7 @@ typedef struct ProtosBluetoothDevice__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosBluetoothDevice__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -556,13 +540,13 @@ typedef struct ProtosBluetoothDevice__storage_ {
 int32_t ProtosBluetoothDevice_Type_RawValue(ProtosBluetoothDevice *message) {
   GPBDescriptor *descriptor = [ProtosBluetoothDevice descriptor];
   GPBFieldDescriptor *field = [descriptor fieldWithNumber:ProtosBluetoothDevice_FieldNumber_Type];
-  return GPBGetMessageRawEnumField(message, field);
+  return GPBGetMessageInt32Field(message, field);
 }
 
 void SetProtosBluetoothDevice_Type_RawValue(ProtosBluetoothDevice *message, int32_t value) {
   GPBDescriptor *descriptor = [ProtosBluetoothDevice descriptor];
   GPBFieldDescriptor *field = [descriptor fieldWithNumber:ProtosBluetoothDevice_FieldNumber_Type];
-  GPBSetMessageRawEnumField(message, field, value);
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
 }
 
 #pragma mark - Enum ProtosBluetoothDevice_Type
@@ -630,34 +614,34 @@ typedef struct ProtosBluetoothService__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "uuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothService_FieldNumber_Uuid,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosBluetoothService__storage_, uuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothService_FieldNumber_RemoteId,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosBluetoothService__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "isPrimary",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothService_FieldNumber_IsPrimary,
         .hasIndex = 2,
         .offset = 3,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "characteristicsArray",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosBluetoothCharacteristic),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosBluetoothCharacteristic),
         .number = ProtosBluetoothService_FieldNumber_CharacteristicsArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(ProtosBluetoothService__storage_, characteristicsArray),
@@ -666,7 +650,7 @@ typedef struct ProtosBluetoothService__storage_ {
       },
       {
         .name = "includedServicesArray",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosBluetoothService),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosBluetoothService),
         .number = ProtosBluetoothService_FieldNumber_IncludedServicesArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(ProtosBluetoothService__storage_, includedServicesArray),
@@ -681,7 +665,7 @@ typedef struct ProtosBluetoothService__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosBluetoothService__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -723,43 +707,43 @@ typedef struct ProtosBluetoothCharacteristic__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "uuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothCharacteristic_FieldNumber_Uuid,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosBluetoothCharacteristic__storage_, uuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothCharacteristic_FieldNumber_RemoteId,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosBluetoothCharacteristic__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "serviceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothCharacteristic_FieldNumber_ServiceUuid,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(ProtosBluetoothCharacteristic__storage_, serviceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
       {
         .name = "secondaryServiceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothCharacteristic_FieldNumber_SecondaryServiceUuid,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(ProtosBluetoothCharacteristic__storage_, secondaryServiceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
       {
         .name = "descriptorsArray",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosBluetoothDescriptor),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosBluetoothDescriptor),
         .number = ProtosBluetoothCharacteristic_FieldNumber_DescriptorsArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(ProtosBluetoothCharacteristic__storage_, descriptorsArray),
@@ -768,7 +752,7 @@ typedef struct ProtosBluetoothCharacteristic__storage_ {
       },
       {
         .name = "properties",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosCharacteristicProperties),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosCharacteristicProperties),
         .number = ProtosBluetoothCharacteristic_FieldNumber_Properties,
         .hasIndex = 4,
         .offset = (uint32_t)offsetof(ProtosBluetoothCharacteristic__storage_, properties),
@@ -777,11 +761,11 @@ typedef struct ProtosBluetoothCharacteristic__storage_ {
       },
       {
         .name = "value",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothCharacteristic_FieldNumber_Value,
         .hasIndex = 5,
         .offset = (uint32_t)offsetof(ProtosBluetoothCharacteristic__storage_, value),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
     };
@@ -792,7 +776,7 @@ typedef struct ProtosBluetoothCharacteristic__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosBluetoothCharacteristic__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
         "\002\003\013\000\004\024\000";
@@ -835,47 +819,47 @@ typedef struct ProtosBluetoothDescriptor__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "uuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothDescriptor_FieldNumber_Uuid,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosBluetoothDescriptor__storage_, uuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothDescriptor_FieldNumber_RemoteId,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosBluetoothDescriptor__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "serviceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothDescriptor_FieldNumber_ServiceUuid,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(ProtosBluetoothDescriptor__storage_, serviceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
       {
         .name = "characteristicUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothDescriptor_FieldNumber_CharacteristicUuid,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(ProtosBluetoothDescriptor__storage_, characteristicUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
       {
         .name = "value",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosBluetoothDescriptor_FieldNumber_Value,
         .hasIndex = 4,
         .offset = (uint32_t)offsetof(ProtosBluetoothDescriptor__storage_, value),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
     };
@@ -886,7 +870,7 @@ typedef struct ProtosBluetoothDescriptor__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosBluetoothDescriptor__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
         "\002\003\013\000\004\022\000";
@@ -929,92 +913,92 @@ typedef struct ProtosCharacteristicProperties__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "broadcast",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_Broadcast,
         .hasIndex = 0,
         .offset = 1,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "read",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_Read,
         .hasIndex = 2,
         .offset = 3,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "writeWithoutResponse",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_WriteWithoutResponse,
         .hasIndex = 4,
         .offset = 5,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "write",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_Write,
         .hasIndex = 6,
         .offset = 7,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "notify",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_Notify,
         .hasIndex = 8,
         .offset = 9,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "indicate",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_Indicate,
         .hasIndex = 10,
         .offset = 11,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "authenticatedSignedWrites",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_AuthenticatedSignedWrites,
         .hasIndex = 12,
         .offset = 13,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "extendedProperties",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_ExtendedProperties,
         .hasIndex = 14,
         .offset = 15,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "notifyEncryptionRequired",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_NotifyEncryptionRequired,
         .hasIndex = 16,
         .offset = 17,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
       {
         .name = "indicateEncryptionRequired",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosCharacteristicProperties_FieldNumber_IndicateEncryptionRequired,
         .hasIndex = 18,
         .offset = 19,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
     };
@@ -1025,7 +1009,7 @@ typedef struct ProtosCharacteristicProperties__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosCharacteristicProperties__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1057,16 +1041,16 @@ typedef struct ProtosDiscoverServicesResult__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosDiscoverServicesResult_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosDiscoverServicesResult__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "servicesArray",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosBluetoothService),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosBluetoothService),
         .number = ProtosDiscoverServicesResult_FieldNumber_ServicesArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(ProtosDiscoverServicesResult__storage_, servicesArray),
@@ -1081,7 +1065,7 @@ typedef struct ProtosDiscoverServicesResult__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosDiscoverServicesResult__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1117,38 +1101,38 @@ typedef struct ProtosReadCharacteristicRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadCharacteristicRequest_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosReadCharacteristicRequest__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "characteristicUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadCharacteristicRequest_FieldNumber_CharacteristicUuid,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosReadCharacteristicRequest__storage_, characteristicUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "serviceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadCharacteristicRequest_FieldNumber_ServiceUuid,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(ProtosReadCharacteristicRequest__storage_, serviceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "secondaryServiceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadCharacteristicRequest_FieldNumber_SecondaryServiceUuid,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(ProtosReadCharacteristicRequest__storage_, secondaryServiceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
@@ -1159,7 +1143,7 @@ typedef struct ProtosReadCharacteristicRequest__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosReadCharacteristicRequest__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1191,16 +1175,16 @@ typedef struct ProtosReadCharacteristicResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadCharacteristicResponse_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosReadCharacteristicResponse__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "characteristic",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosBluetoothCharacteristic),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosBluetoothCharacteristic),
         .number = ProtosReadCharacteristicResponse_FieldNumber_Characteristic,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosReadCharacteristicResponse__storage_, characteristic),
@@ -1215,7 +1199,7 @@ typedef struct ProtosReadCharacteristicResponse__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosReadCharacteristicResponse__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1253,47 +1237,47 @@ typedef struct ProtosReadDescriptorRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadDescriptorRequest_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosReadDescriptorRequest__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "descriptorUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadDescriptorRequest_FieldNumber_DescriptorUuid,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosReadDescriptorRequest__storage_, descriptorUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "serviceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadDescriptorRequest_FieldNumber_ServiceUuid,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(ProtosReadDescriptorRequest__storage_, serviceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "secondaryServiceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadDescriptorRequest_FieldNumber_SecondaryServiceUuid,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(ProtosReadDescriptorRequest__storage_, secondaryServiceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "characteristicUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadDescriptorRequest_FieldNumber_CharacteristicUuid,
         .hasIndex = 4,
         .offset = (uint32_t)offsetof(ProtosReadDescriptorRequest__storage_, characteristicUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
@@ -1304,7 +1288,7 @@ typedef struct ProtosReadDescriptorRequest__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosReadDescriptorRequest__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1336,7 +1320,7 @@ typedef struct ProtosReadDescriptorResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "request",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosReadDescriptorRequest),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosReadDescriptorRequest),
         .number = ProtosReadDescriptorResponse_FieldNumber_Request,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosReadDescriptorResponse__storage_, request),
@@ -1345,11 +1329,11 @@ typedef struct ProtosReadDescriptorResponse__storage_ {
       },
       {
         .name = "value",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosReadDescriptorResponse_FieldNumber_Value,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosReadDescriptorResponse__storage_, value),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
     };
@@ -1360,7 +1344,7 @@ typedef struct ProtosReadDescriptorResponse__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosReadDescriptorResponse__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1400,38 +1384,38 @@ typedef struct ProtosWriteCharacteristicRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteCharacteristicRequest_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosWriteCharacteristicRequest__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "characteristicUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteCharacteristicRequest_FieldNumber_CharacteristicUuid,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosWriteCharacteristicRequest__storage_, characteristicUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "serviceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteCharacteristicRequest_FieldNumber_ServiceUuid,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(ProtosWriteCharacteristicRequest__storage_, serviceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "secondaryServiceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteCharacteristicRequest_FieldNumber_SecondaryServiceUuid,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(ProtosWriteCharacteristicRequest__storage_, secondaryServiceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
@@ -1440,16 +1424,16 @@ typedef struct ProtosWriteCharacteristicRequest__storage_ {
         .number = ProtosWriteCharacteristicRequest_FieldNumber_WriteType,
         .hasIndex = 4,
         .offset = (uint32_t)offsetof(ProtosWriteCharacteristicRequest__storage_, writeType),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
         .dataType = GPBDataTypeEnum,
       },
       {
         .name = "value",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteCharacteristicRequest_FieldNumber_Value,
         .hasIndex = 5,
         .offset = (uint32_t)offsetof(ProtosWriteCharacteristicRequest__storage_, value),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
     };
@@ -1460,7 +1444,7 @@ typedef struct ProtosWriteCharacteristicRequest__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosWriteCharacteristicRequest__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1474,13 +1458,13 @@ typedef struct ProtosWriteCharacteristicRequest__storage_ {
 int32_t ProtosWriteCharacteristicRequest_WriteType_RawValue(ProtosWriteCharacteristicRequest *message) {
   GPBDescriptor *descriptor = [ProtosWriteCharacteristicRequest descriptor];
   GPBFieldDescriptor *field = [descriptor fieldWithNumber:ProtosWriteCharacteristicRequest_FieldNumber_WriteType];
-  return GPBGetMessageRawEnumField(message, field);
+  return GPBGetMessageInt32Field(message, field);
 }
 
 void SetProtosWriteCharacteristicRequest_WriteType_RawValue(ProtosWriteCharacteristicRequest *message, int32_t value) {
   GPBDescriptor *descriptor = [ProtosWriteCharacteristicRequest descriptor];
   GPBFieldDescriptor *field = [descriptor fieldWithNumber:ProtosWriteCharacteristicRequest_FieldNumber_WriteType];
-  GPBSetMessageRawEnumField(message, field, value);
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
 }
 
 #pragma mark - Enum ProtosWriteCharacteristicRequest_WriteType
@@ -1538,7 +1522,7 @@ typedef struct ProtosWriteCharacteristicResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "request",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosWriteCharacteristicRequest),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosWriteCharacteristicRequest),
         .number = ProtosWriteCharacteristicResponse_FieldNumber_Request,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosWriteCharacteristicResponse__storage_, request),
@@ -1547,11 +1531,11 @@ typedef struct ProtosWriteCharacteristicResponse__storage_ {
       },
       {
         .name = "success",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteCharacteristicResponse_FieldNumber_Success,
         .hasIndex = 1,
         .offset = 2,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
     };
@@ -1562,7 +1546,7 @@ typedef struct ProtosWriteCharacteristicResponse__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosWriteCharacteristicResponse__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1602,56 +1586,56 @@ typedef struct ProtosWriteDescriptorRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteDescriptorRequest_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosWriteDescriptorRequest__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "descriptorUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteDescriptorRequest_FieldNumber_DescriptorUuid,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosWriteDescriptorRequest__storage_, descriptorUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "serviceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteDescriptorRequest_FieldNumber_ServiceUuid,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(ProtosWriteDescriptorRequest__storage_, serviceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "secondaryServiceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteDescriptorRequest_FieldNumber_SecondaryServiceUuid,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(ProtosWriteDescriptorRequest__storage_, secondaryServiceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "characteristicUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteDescriptorRequest_FieldNumber_CharacteristicUuid,
         .hasIndex = 4,
         .offset = (uint32_t)offsetof(ProtosWriteDescriptorRequest__storage_, characteristicUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "value",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteDescriptorRequest_FieldNumber_Value,
         .hasIndex = 5,
         .offset = (uint32_t)offsetof(ProtosWriteDescriptorRequest__storage_, value),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
     };
@@ -1662,7 +1646,7 @@ typedef struct ProtosWriteDescriptorRequest__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosWriteDescriptorRequest__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1693,7 +1677,7 @@ typedef struct ProtosWriteDescriptorResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "request",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosWriteDescriptorRequest),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosWriteDescriptorRequest),
         .number = ProtosWriteDescriptorResponse_FieldNumber_Request,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosWriteDescriptorResponse__storage_, request),
@@ -1702,11 +1686,11 @@ typedef struct ProtosWriteDescriptorResponse__storage_ {
       },
       {
         .name = "success",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosWriteDescriptorResponse_FieldNumber_Success,
         .hasIndex = 1,
         .offset = 2,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
     };
@@ -1717,7 +1701,7 @@ typedef struct ProtosWriteDescriptorResponse__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosWriteDescriptorResponse__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1754,47 +1738,47 @@ typedef struct ProtosSetNotificationRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosSetNotificationRequest_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosSetNotificationRequest__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "serviceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosSetNotificationRequest_FieldNumber_ServiceUuid,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosSetNotificationRequest__storage_, serviceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "secondaryServiceUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosSetNotificationRequest_FieldNumber_SecondaryServiceUuid,
         .hasIndex = 2,
         .offset = (uint32_t)offsetof(ProtosSetNotificationRequest__storage_, secondaryServiceUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "characteristicUuid",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosSetNotificationRequest_FieldNumber_CharacteristicUuid,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(ProtosSetNotificationRequest__storage_, characteristicUuid),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "enable",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosSetNotificationRequest_FieldNumber_Enable,
         .hasIndex = 4,
         .offset = 5,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
     };
@@ -1805,7 +1789,7 @@ typedef struct ProtosSetNotificationRequest__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosSetNotificationRequest__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1838,16 +1822,16 @@ typedef struct ProtosSetNotificationResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosSetNotificationResponse_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosSetNotificationResponse__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "characteristic",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosBluetoothCharacteristic),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosBluetoothCharacteristic),
         .number = ProtosSetNotificationResponse_FieldNumber_Characteristic,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosSetNotificationResponse__storage_, characteristic),
@@ -1856,11 +1840,11 @@ typedef struct ProtosSetNotificationResponse__storage_ {
       },
       {
         .name = "success",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosSetNotificationResponse_FieldNumber_Success,
         .hasIndex = 2,
         .offset = 3,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBool,
       },
     };
@@ -1871,7 +1855,7 @@ typedef struct ProtosSetNotificationResponse__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosSetNotificationResponse__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1903,16 +1887,16 @@ typedef struct ProtosOnCharacteristicChanged__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosOnCharacteristicChanged_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosOnCharacteristicChanged__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "characteristic",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosBluetoothCharacteristic),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosBluetoothCharacteristic),
         .number = ProtosOnCharacteristicChanged_FieldNumber_Characteristic,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosOnCharacteristicChanged__storage_, characteristic),
@@ -1927,7 +1911,7 @@ typedef struct ProtosOnCharacteristicChanged__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosOnCharacteristicChanged__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1959,11 +1943,11 @@ typedef struct ProtosDeviceStateResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosDeviceStateResponse_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosDeviceStateResponse__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
@@ -1972,7 +1956,7 @@ typedef struct ProtosDeviceStateResponse__storage_ {
         .number = ProtosDeviceStateResponse_FieldNumber_State,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosDeviceStateResponse__storage_, state),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
         .dataType = GPBDataTypeEnum,
       },
     };
@@ -1983,7 +1967,7 @@ typedef struct ProtosDeviceStateResponse__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosDeviceStateResponse__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -1997,13 +1981,13 @@ typedef struct ProtosDeviceStateResponse__storage_ {
 int32_t ProtosDeviceStateResponse_State_RawValue(ProtosDeviceStateResponse *message) {
   GPBDescriptor *descriptor = [ProtosDeviceStateResponse descriptor];
   GPBFieldDescriptor *field = [descriptor fieldWithNumber:ProtosDeviceStateResponse_FieldNumber_State];
-  return GPBGetMessageRawEnumField(message, field);
+  return GPBGetMessageInt32Field(message, field);
 }
 
 void SetProtosDeviceStateResponse_State_RawValue(ProtosDeviceStateResponse *message, int32_t value) {
   GPBDescriptor *descriptor = [ProtosDeviceStateResponse descriptor];
   GPBFieldDescriptor *field = [descriptor fieldWithNumber:ProtosDeviceStateResponse_FieldNumber_State];
-  GPBSetMessageRawEnumField(message, field, value);
+  GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
 }
 
 #pragma mark - Enum ProtosDeviceStateResponse_BluetoothDeviceState
@@ -2065,7 +2049,7 @@ typedef struct ProtosConnectedDevicesResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "devicesArray",
-        .dataTypeSpecific.clazz = GPBObjCClass(ProtosBluetoothDevice),
+        .dataTypeSpecific.className = GPBStringifySymbol(ProtosBluetoothDevice),
         .number = ProtosConnectedDevicesResponse_FieldNumber_DevicesArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(ProtosConnectedDevicesResponse__storage_, devicesArray),
@@ -2080,7 +2064,7 @@ typedef struct ProtosConnectedDevicesResponse__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosConnectedDevicesResponse__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -2112,20 +2096,20 @@ typedef struct ProtosMtuSizeRequest__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosMtuSizeRequest_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosMtuSizeRequest__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "mtu",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosMtuSizeRequest_FieldNumber_Mtu,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosMtuSizeRequest__storage_, mtu),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
     };
@@ -2136,7 +2120,7 @@ typedef struct ProtosMtuSizeRequest__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosMtuSizeRequest__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
@@ -2168,20 +2152,20 @@ typedef struct ProtosMtuSizeResponse__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "remoteId",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosMtuSizeResponse_FieldNumber_RemoteId,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(ProtosMtuSizeResponse__storage_, remoteId),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "mtu",
-        .dataTypeSpecific.clazz = Nil,
+        .dataTypeSpecific.className = NULL,
         .number = ProtosMtuSizeResponse_FieldNumber_Mtu,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(ProtosMtuSizeResponse__storage_, mtu),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
     };
@@ -2192,7 +2176,7 @@ typedef struct ProtosMtuSizeResponse__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(ProtosMtuSizeResponse__storage_)
-                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+                                         flags:GPBDescriptorInitializationFlag_None];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG
