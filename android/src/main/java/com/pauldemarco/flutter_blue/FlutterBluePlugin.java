@@ -61,28 +61,25 @@ import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener;
 import io.flutter.plugin.common.PluginRegistry.ActivityResultListener;
 
 /** FlutterBluePlugin */
-public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCallHandler, RequestPermissionsResultListener  {
+public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCallHandler, RequestPermissionsResultListener, ActivityResultListener  {
     private static final String TAG = "FlutterBluePlugin";
     private static FlutterBluePlugin instance;
     private Object initializationLock = new Object();
     private Context context;
-    private MethodChannel channel;
     private static final String NAMESPACE = "plugins.pauldemarco.com/flutter_blue";
     static final private UUID CCCD_ID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
-    private final Registrar registrar;
-    private final Activity activity;
-    private final MethodChannel channel;
-    private final EventChannel stateChannel;
-    private final BluetoothManager mBluetoothManager;
+    private Registrar registrar;
+    private Activity activity;
+    private MethodChannel channel;
+    private EventChannel stateChannel;
+    private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
 
     private FlutterPluginBinding pluginBinding;
     private ActivityPluginBinding activityBinding;
     private Application application;
-    private Activity activity;
 
     private static final int REQUEST_FINE_LOCATION_PERMISSIONS = 1452;
-    static final private UUID CCCD_ID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
     private final Map<String, BluetoothDeviceCache> mDevices = new HashMap<>();
     private LogLevel logLevel = LogLevel.EMERGENCY;
 
@@ -110,6 +107,7 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
             application = (Application) (registrar.context().getApplicationContext());
         }
         instance.setup(registrar.messenger(), application, activity, registrar, null);
+        registrar.addRequestPermissionsResultListener(instance);
     }
 
     public FlutterBluePlugin() {}
@@ -193,7 +191,7 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
 
 
     @Override
-    public void onMethodCall(MethodCall call, Result result) {
+    public void onMethodCall(MethodCall call, final Result result) {
         if(mBluetoothAdapter == null && !"isAvailable".equals(call.method)) {
             result.error("bluetooth_unavailable", "the device does not have bluetooth", null);
             return;
