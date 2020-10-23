@@ -30,11 +30,11 @@ The BluetoothDevice object is then used to directly interact with characteristic
 ## Setup
 ### Change the minSdkVersion for Android
 
-Flutter_blue is compatible only from version 19 of Android SDK so you should change this in **android/app/build.gradle**:
+Flutter_blue is compatible only from version 24 of Android SDK so you should change this in **android/app/build.gradle**:
 ```dart
 Android {
   defaultConfig {
-     minSdkVersion: 19
+     minSdkVersion: 24
 ```
 ### Add permissions for Bluetooth
 We need to add the permission to use Bluetooth and access location:
