@@ -72,8 +72,8 @@ class FindDevicesScreen extends StatelessWidget {
         title: Text('Find Devices'),
       ),
       body: RefreshIndicator(
-        onRefresh: () =>
-            FlutterBlue.instance.startScan(scanMode: ScanMode.balanced, timeout: Duration(seconds: 10)),
+        onRefresh: () => FlutterBlue.instance.startScan(
+            scanMode: ScanMode.balanced, timeout: Duration(seconds: 10)),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -142,8 +142,9 @@ class FindDevicesScreen extends StatelessWidget {
           } else {
             return FloatingActionButton(
                 child: Icon(Icons.search),
-                onPressed: () => FlutterBlue.instance
-                    .startScan(scanMode: ScanMode.balanced, timeout: Duration(seconds: 10)));
+                onPressed: () => FlutterBlue.instance.startScan(
+                    scanMode: ScanMode.balanced,
+                    timeout: Duration(seconds: 10)));
           }
         },
       ),
