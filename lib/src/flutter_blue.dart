@@ -80,6 +80,10 @@ class FlutterBlue {
     }
   }
 
+  Future<dynamic> initWithDelegate() {
+    return _channel.invokeMethod('initWithDelegate', {});
+  }
+
   /// Starts a scan for Bluetooth Low Energy devices and returns a stream
   /// of the [ScanResult] results as they are received.
   ///

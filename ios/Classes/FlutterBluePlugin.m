@@ -449,7 +449,7 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-  NSLog(@"didUpdateValueForCharacteristic %@", [peripheral.identifier UUIDString]);
+  // NSLog(@"didUpdateValueForCharacteristic %@", [peripheral.identifier UUIDString]);
   ProtosReadCharacteristicResponse *result = [[ProtosReadCharacteristicResponse alloc] init];
   [result setRemoteId:[peripheral.identifier UUIDString]];
   [result setCharacteristic:[self toCharacteristicProto:peripheral characteristic:characteristic]];
@@ -686,7 +686,7 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
   [result setRemoteId:[peripheral.identifier UUIDString]];
   [result setProperties:[self toCharacteristicPropsProto:characteristic.properties]];
   [result setValue:[characteristic value]];
-  NSLog(@"uuid: %@ value: %@", [characteristic.UUID fullUUIDString], [characteristic value]);
+  // NSLog(@"uuid: %@ value: %@", [characteristic.UUID fullUUIDString], [characteristic value]);
   NSMutableArray *descriptorProtos = [NSMutableArray new];
   for(CBDescriptor *d in [characteristic descriptors]) {
     [descriptorProtos addObject:[self toDescriptorProto:peripheral descriptor:d]];
