@@ -804,7 +804,13 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
         List<ScanFilter> filters = new ArrayList<>(count);
         for(int i = 0; i < count; i++) {
             String uuid = proto.getServiceUuids(i);
-            ScanFilter f = new ScanFilter.Builder().setServiceUuid(ParcelUuid.fromString(uuid)).build();
+            
+            // ScanFilter f = new ScanFilter.Builder().setServiceUuid(ParcelUuid.fromString(uuid)).build();
+            ScanFilter f = new ScanFilter.Builder()
+            .setServiceData(ParcelUuid.fromString(uuid), new byte[] { 0x00, 0x00 }, new byte[] { 0x00, 0x00 })
+            .build();
+
+
             filters.add(f);
         }
         ScanSettings settings = new ScanSettings.Builder().setScanMode(scanMode).build();
@@ -899,7 +905,7 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-            log(LogLevel.DEBUG, "[onCharacteristicChanged] uuid: " + characteristic.getUuid().toString());
+            // log(LogLevel.DEBUG, "[onCharacteristicChanged] uuid: " + characteristic.getUuid().toString());
             Protos.OnCharacteristicChanged.Builder p = Protos.OnCharacteristicChanged.newBuilder();
             p.setRemoteId(gatt.getDevice().getAddress());
             p.setCharacteristic(ProtoMaker.from(gatt.getDevice(), characteristic, gatt));
