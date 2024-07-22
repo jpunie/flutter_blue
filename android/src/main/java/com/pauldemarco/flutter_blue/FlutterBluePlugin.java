@@ -898,6 +898,13 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             log(LogLevel.DEBUG, "[onConnectionStateChange] status: " + status + " newState: " + newState);
+            // if (newState == BluetoothProfile.STATE_CONNECTED) {
+            //     if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            //         if (gatt.requestConnectionPriority(BluetoothGatt.CONNECTION_PRIORITY_HIGH)) {
+            //             log(LogLevel.DEBUG, "[onConnectionStateChange] requestConnectionPriority High");                        
+            //         }
+            //     }
+            // }
             if(newState == BluetoothProfile.STATE_DISCONNECTED) {
                 if(!mDevices.containsKey(gatt.getDevice().getAddress())) {
                     gatt.close();
@@ -918,7 +925,7 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
         }
 
         @Override
-        public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+        public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) { 
             log(LogLevel.DEBUG, "[onCharacteristicRead] uuid: " + characteristic.getUuid().toString() + " status: " + status);
             Protos.ReadCharacteristicResponse.Builder p = Protos.ReadCharacteristicResponse.newBuilder();
             p.setRemoteId(gatt.getDevice().getAddress());
@@ -947,6 +954,18 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
             p.setCharacteristic(ProtoMaker.from(gatt.getDevice(), characteristic, gatt));
             invokeMethodUIThread("OnCharacteristicChanged", p.build().toByteArray());
         }
+
+        // @Override
+        // @TargetApi(33)
+        // public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, byte[] value)
+        // {
+        //     log(LogLevel.DEBUG, "API 33 [onCharacteristicChanged] uuid: " + characteristic.getUuid().toString());
+        //     log(LogLevel.DEBUG, "API 33 [onCharacteristicChanged]: data: " + new String(value));
+        //     Protos.OnCharacteristicChanged.Builder p = Protos.OnCharacteristicChanged.newBuilder();
+        //     p.setRemoteId(gatt.getDevice().getAddress());
+        //     p.setCharacteristic(ProtoMaker.from(gatt.getDevice(), characteristic, gatt));
+        //     invokeMethodUIThread("OnCharacteristicChanged", p.build().toByteArray());
+        // }
 
         @Override
         public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
