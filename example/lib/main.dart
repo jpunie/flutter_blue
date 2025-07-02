@@ -52,10 +52,10 @@ class BluetoothOffScreen extends StatelessWidget {
             ),
             Text(
               'Bluetooth Adapter is ${state != null ? state.toString().substring(15) : 'not available'}.',
-              style: Theme.of(context)
-                  .primaryTextTheme
-                  .subhead
-                  ?.copyWith(color: Colors.white),
+              // style: Theme.of(context)
+              //     .primaryTextTheme
+              //     .subhead
+              //     ?.copyWith(color: Colors.white),
             ),
           ],
         ),
@@ -72,8 +72,9 @@ class FindDevicesScreen extends StatelessWidget {
         title: Text('Find Devices'),
       ),
       body: RefreshIndicator(
-        onRefresh: () =>
-            FlutterBlue.instance.startScan(timeout: Duration(seconds: 4)),
+        onRefresh: () => FlutterBlue.instance.startScan(
+            withServices: [new Guid("00002a6e-0000-1000-8000-00805f9b34fb")],
+            timeout: Duration(seconds: 4)),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
@@ -92,7 +93,7 @@ class FindDevicesScreen extends StatelessWidget {
                               builder: (c, snapshot) {
                                 if (snapshot.data ==
                                     BluetoothDeviceState.connected) {
-                                  return RaisedButton(
+                                  return MaterialButton(
                                     child: Text('OPEN'),
                                     onPressed: () => Navigator.of(context).push(
                                         MaterialPageRoute(
@@ -142,8 +143,9 @@ class FindDevicesScreen extends StatelessWidget {
           } else {
             return FloatingActionButton(
                 child: Icon(Icons.search),
-                onPressed: () => FlutterBlue.instance
-                    .startScan(timeout: Duration(seconds: 4)));
+                onPressed: () => FlutterBlue.instance.startScan(withServices: [
+                      new Guid("00002a6e-0000-1000-8000-00805f9b34fb")
+                    ], timeout: Duration(seconds: 4)));
           }
         },
       ),
@@ -227,14 +229,13 @@ class DeviceScreen extends StatelessWidget {
                   text = snapshot.data.toString().substring(21).toUpperCase();
                   break;
               }
-              return FlatButton(
+              return MaterialButton(
                   onPressed: onPressed,
                   child: Text(
                     text,
-                    style: Theme.of(context)
-                        .primaryTextTheme
-                        .button
-                        ?.copyWith(color: Colors.white),
+                    // style: Theme.of(context)
+                    //     .buttonTheme
+                    //     ?.copyWith(color: Colors.white),
                   ));
             },
           )
@@ -278,18 +279,18 @@ class DeviceScreen extends StatelessWidget {
                 ),
               ),
             ),
-            StreamBuilder<int>(
-              stream: device.mtu,
-              initialData: 0,
-              builder: (c, snapshot) => ListTile(
-                title: Text('MTU Size'),
-                subtitle: Text('${snapshot.data} bytes'),
-                trailing: IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () => device.requestMtu(223),
-                ),
-              ),
-            ),
+            // StreamBuilder<int>(
+            //   stream: device.mtu,
+            //   initialData: 0,
+            //   builder: (c, snapshot) => ListTile(
+            //     title: Text('MTU Size'),
+            //     subtitle: Text('${snapshot.data} bytes'),
+            //     trailing: IconButton(
+            //       icon: Icon(Icons.edit),
+            //       onPressed: () => device.requestMtu(223),
+            //     ),
+            //   ),
+            // ),
             StreamBuilder<List<BluetoothService>>(
               stream: device.services,
               initialData: [],

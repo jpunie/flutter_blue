@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:8.2.1'
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.9.3'
     }
 }
@@ -25,10 +25,10 @@ apply plugin: 'com.google.protobuf'
 
 android {
     namespace "com.pauldemarco.flutter_blue"
-    compileSdkVersion 34
+    compileSdkVersion flutter.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion flutter.minSdkVersion
     }
     sourceSets {
         main {

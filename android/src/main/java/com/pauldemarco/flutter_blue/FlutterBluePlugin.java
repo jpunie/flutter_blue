@@ -56,24 +56,21 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
-import io.flutter.plugin.common.PluginRegistry.RequestPermissionsResultListener;
 
+public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCallHandler, PluginRegistry.RequestPermissionsResultListener {
 
-/** FlutterBluePlugin */
-public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCallHandler, RequestPermissionsResultListener  {
     private static final String TAG = "FlutterBluePlugin";
     private Object initializationLock = new Object();
     private Context context;
     private MethodChannel channel;
-    private static final String NAMESPACE = "plugins.pauldemarco.com/flutter_blue";
+    private static final String NAMESPACE = "plugins.pauldemarco.com/flutter_blue/methods";
 
     private EventChannel stateChannel;
     private BluetoothManager mBluetoothManager;
     private BluetoothAdapter mBluetoothAdapter;
 
-    private FlutterPluginBinding pluginBinding;
-    private ActivityPluginBinding activityBinding;
+    private FlutterPluginBinding flutterPluginBinding;
+    private ActivityPluginBinding activityPluginBinding;
     private Application application;
     private Activity activity;
 
@@ -93,87 +90,80 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
     private boolean allowDuplicates = false;
 
     /** Plugin registration. */
-    public static void registerWith(Registrar registrar) {
-        FlutterBluePlugin instance = new FlutterBluePlugin();
-        Activity activity = registrar.activity();
-        Application application = null;
-        if (registrar.context() != null) {
-            application = (Application) (registrar.context().getApplicationContext());
-        }
-        instance.setup(registrar.messenger(), application, activity, registrar, null);
-    }
+    // public static void registerWith(Registrar registrar) {
+    //     FlutterBluePlugin instance = new FlutterBluePlugin();
+    //     Activity activity = registrar.activity();
+    //     Application application = null;
+    //     if (registrar.context() != null) {
+    //         application = (Application) (registrar.context().getApplicationContext());
+    //     }
+    //     instance.setup(registrar.messenger(), application, activity, registrar, null);
+    // }
 
     public FlutterBluePlugin() {}
 
     @Override
     public void onAttachedToEngine(FlutterPluginBinding binding) {
-        pluginBinding = binding;
+        flutterPluginBinding = binding;
     }
 
     @Override
     public void onDetachedFromEngine(FlutterPluginBinding binding) {
-        pluginBinding = null;
+        flutterPluginBinding = null;
 
     }
 
     @Override
     public void onAttachedToActivity(ActivityPluginBinding binding) {
-        activityBinding = binding;
-        setup(
-                pluginBinding.getBinaryMessenger(),
-                (Application) pluginBinding.getApplicationContext(),
-                activityBinding.getActivity(),
-                null,
-                activityBinding);
+        activityPluginBinding = binding;
+        setup(flutterPluginBinding.getBinaryMessenger(),
+                (Application) flutterPluginBinding.getApplicationContext(),
+                activityPluginBinding.getActivity(),
+                activityPluginBinding);
     }
 
     @Override
     public void onDetachedFromActivity() {
-        tearDown();
-    }
-
-    @Override
-    public void onDetachedFromActivityForConfigChanges() {
-        onDetachedFromActivity();
+        detach();
     }
 
     @Override
     public void onReattachedToActivityForConfigChanges(ActivityPluginBinding binding) {
-        onAttachedToActivity(binding);
+        this.activityPluginBinding = binding;
+        setup(flutterPluginBinding.getBinaryMessenger(),
+                (Application) flutterPluginBinding.getApplicationContext(),
+                activityPluginBinding.getActivity(),
+                activityPluginBinding);
+    }
+
+    @Override
+    public void onDetachedFromActivityForConfigChanges() {
+        detach();
     }
 
     private void setup(
             final BinaryMessenger messenger,
             final Application application,
             final Activity activity,
-            final PluginRegistry.Registrar registrar,
-            final ActivityPluginBinding activityBinding) {
-        synchronized (initializationLock) {
-            Log.i(TAG, "setup");
-            this.activity = activity;
-            this.application = application;
-            this.context = application;
-            channel = new MethodChannel(messenger, NAMESPACE + "/methods");
-            channel.setMethodCallHandler(this);
-            stateChannel = new EventChannel(messenger, NAMESPACE + "/state");
-            stateChannel.setStreamHandler(stateHandler);
-            mBluetoothManager = (BluetoothManager) application.getSystemService(Context.BLUETOOTH_SERVICE);
-            mBluetoothAdapter = mBluetoothManager.getAdapter();
-            if (registrar != null) {
-                // V1 embedding setup for activity listeners.
-                registrar.addRequestPermissionsResultListener(this);
-            } else {
-                // V2 embedding setup for activity listeners.
-                activityBinding.addRequestPermissionsResultListener(this);
-            }
-        }
+            final ActivityPluginBinding activityPluginBinding) {
+
+        this.channel = new MethodChannel(messenger, NAMESPACE);
+        this.channel.setMethodCallHandler(this);
+        this.stateChannel = new EventChannel(messenger, "plugins.pauldemarco.com/flutter_blue/state");
+        this.stateChannel.setStreamHandler(stateHandler);
+        mBluetoothManager = (BluetoothManager) application.getSystemService(Context.BLUETOOTH_SERVICE);
+        mBluetoothAdapter = mBluetoothManager.getAdapter();
+        this.activity = activity;
+        this.application = application;
+        this.context = application;
+        activityPluginBinding.addRequestPermissionsResultListener(this);
     }
 
-    private void tearDown() {
+    private void detach() {
         Log.i(TAG, "teardown");
         context = null;
-        activityBinding.removeRequestPermissionsResultListener(this);
-        activityBinding = null;
+        activityPluginBinding.removeRequestPermissionsResultListener(this);
+        activityPluginBinding = null;
         channel.setMethodCallHandler(null);
         channel = null;
         stateChannel.setStreamHandler(null);
@@ -659,7 +649,7 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
                 operation.op(granted, perm);
             });
             ActivityCompat.requestPermissions(
-                    activityBinding.getActivity(),
+                    activityPluginBinding.getActivity(),
                     permissions,
                     lastEventId);
             lastEventId++;
